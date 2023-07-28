@@ -31,4 +31,14 @@ public class CalculatorImplementation extends UnicastRemoteObject implements Cal
     public int pop() throws RemoteException {
         return mainStack.pop();
     }
+
+    @Override
+    public int delayPop(int millis) throws RemoteException {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return pop();
+    }
 }

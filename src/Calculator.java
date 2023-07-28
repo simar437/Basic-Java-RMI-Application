@@ -11,4 +11,6 @@ public interface Calculator extends Remote {
     boolean isEmpty() throws RemoteException;
 
     int pop() throws RemoteException;
+
+    int delayPop(int millis) throws RemoteException;
 }
