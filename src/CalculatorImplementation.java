@@ -13,17 +13,33 @@ public class CalculatorImplementation extends UnicastRemoteObject implements Cal
     public void pushValue(int val) throws RemoteException {
         mainStack.push(val);
     }
-
+    int gcd(int a, int b) {
+        a = Math.abs(a);
+        b = Math.abs(b);
+        while (b != 0) {
+            int remainder = a % b;
+            a = b;
+            b = remainder;
+        }
+        return a;
+    }
     @Override
     public void pushOperation(String operator) throws RemoteException {
         int x = 0;
+        int min = Collections.min(mainStack);
+        int max = Collections.max(mainStack);
         switch (operator) {
             case "min":
-                x = Collections.min(mainStack);
+                x = min;
                 break;
             case "max":
-                x = Collections.max(mainStack);
+                x = max;
                 break;
+            case "gcd":
+                x = gcd(min, max);
+                break;
+
+
         }
         mainStack.clear();
         pushValue(x);
