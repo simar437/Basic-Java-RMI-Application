@@ -1,5 +1,6 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Collections;
 import java.util.Stack;
 
 public class CalculatorImplementation extends UnicastRemoteObject implements Calculator {
@@ -11,6 +12,21 @@ public class CalculatorImplementation extends UnicastRemoteObject implements Cal
     @Override
     public void pushValue(int val) throws RemoteException {
         mainStack.push(val);
+    }
+
+    @Override
+    public void pushOperation(String operator) throws RemoteException {
+        int x = 0;
+        switch (operator) {
+            case "min":
+                x = Collections.min(mainStack);
+                break;
+            case "max":
+                x = Collections.max(mainStack);
+                break;
+        }
+        mainStack.clear();
+        pushValue(x);
     }
 
     @Override
