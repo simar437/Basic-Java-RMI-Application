@@ -14,10 +14,21 @@ public class CalculatorImplementation extends UnicastRemoteObject implements Cal
     }
 
     @Override
-    public void printStack() throws RemoteException {
+    public String stackState() throws RemoteException {
+        String state = "";
         for (int i : mainStack) {
-            System.out.print(i + " ");
+            state += i + " ";
         }
-        System.out.println();
+        return state;
+    }
+
+    @Override
+    public boolean isEmpty() throws RemoteException {
+        return mainStack.isEmpty();
+    }
+
+    @Override
+    public int pop() throws RemoteException {
+        return mainStack.pop();
     }
 }

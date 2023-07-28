@@ -6,5 +6,9 @@ public interface Calculator extends Remote {
 
     // void pushOperation(String operator) throws RemoteException;
 
-    void printStack() throws RemoteException;
+    String stackState() throws RemoteException;
+
+    boolean isEmpty() throws RemoteException;
+
+    int pop() throws RemoteException;
 }

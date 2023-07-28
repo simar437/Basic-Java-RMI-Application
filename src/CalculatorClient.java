@@ -20,8 +20,7 @@ public class CalculatorClient {
                      calculator.pushValue(sc.nextInt());
                  }
                  if (num == 2) {
-                     System.out.print("Stack: ");
-                     calculator.printStack();
+                     System.out.println("Stack: " + calculator.stackState());
                  }
             } while (num != -1);
 
