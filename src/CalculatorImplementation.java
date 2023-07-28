@@ -12,4 +12,12 @@ public class CalculatorImplementation extends UnicastRemoteObject implements Cal
     public void pushValue(int val) throws RemoteException {
         mainStack.push(val);
     }
+
+    @Override
+    public void printStack() throws RemoteException {
+        for (int i : mainStack) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
 }
