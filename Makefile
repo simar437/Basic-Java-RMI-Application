@@ -10,9 +10,6 @@ CLIENT_CLASS = CalculatorClient
 
 default: compile
 
-$(OUT_DIR):
-	mkdir -p $(OUT_DIR)
-
 compile:
 	$(JAVAC) -d $(OUT_DIR) $(SRC_DIR)/*.java
 
