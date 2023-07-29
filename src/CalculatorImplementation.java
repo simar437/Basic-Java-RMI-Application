@@ -14,14 +14,13 @@ public class CalculatorImplementation extends UnicastRemoteObject implements Cal
         mainStack.push(val);
     }
     int gcd(int a, int b) {
-        a = Math.abs(a);
-        b = Math.abs(b);
-        while (b != 0) {
-            int remainder = a % b;
-            a = b;
-            b = remainder;
-        }
-        return a;
+        if (b == 0)
+            return a;
+        return gcd(b, a % b);
+    }
+
+    int lcm(int a, int b) {
+        return (a * b) / gcd(a, b);
     }
     @Override
     public void pushOperation(String operator) throws RemoteException {
@@ -38,8 +37,12 @@ public class CalculatorImplementation extends UnicastRemoteObject implements Cal
             case "gcd":
                 x = gcd(min, max);
                 break;
-
-
+            case "lcm":
+                x = mainStack.pop();
+                while (!mainStack.isEmpty()) {
+                    x = lcm(x, mainStack.pop());
+                }
+                break;
         }
         mainStack.clear();
         pushValue(x);
