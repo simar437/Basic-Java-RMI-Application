@@ -12,15 +12,24 @@ public class CalculatorClient {
              do {
                  System.out.println("Enter your Choice: ");
                  System.out.println("1 - Push Value");
-                 System.out.println("2 - Print Stack");
+                 System.out.println("2) Pop value");
+                 System.out.println("3) Push Operation");
+                 System.out.println("4) - Print Stack");
                  System.out.println("-1 - Exit");
                  num = sc.nextInt();
-                 if (num == 1) {
-                     System.out.print("Enter a number to push in the stack: ");
-                     calculator.pushValue(sc.nextInt());
-                 }
-                 if (num == 2) {
-                     System.out.println("Stack: " + calculator.stackState());
+                 switch (num) {
+                     case 1:
+                         System.out.print("Enter a number to push in the stack: ");
+                         calculator.pushValue(sc.nextInt());
+                         break;
+                     case 2:
+                         calculator.pop();
+                         break;
+                     case 3:
+                         calculator.pushOperation(sc.next());
+                         break;
+                     case 4:
+                         System.out.println("Stack: " + calculator.stackState());
                  }
             } while (num != -1);
 
