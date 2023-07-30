@@ -1,17 +1,21 @@
 import java.rmi.RemoteException;
+import java.rmi.server.ServerNotActiveException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Stack;
+import java.util.UUID;
 
 public class CalculatorImplementation extends UnicastRemoteObject implements Calculator {
-    Stack<Integer> mainStack = new Stack<>();
+    //Stack<Integer> mainStack.get(clientID) = new Stack<>();
+    HashMap<String, Stack<Integer>> mainStack = new HashMap<>();
     protected CalculatorImplementation() throws RemoteException {
         super();
     }
 
     @Override
-    public void pushValue(int val) throws RemoteException {
-        mainStack.push(val);
+    public void pushValue(int val, String clientID) throws RemoteException {
+        mainStack.get(clientID).push(val);
     }
     int gcd(int a, int b) {
         if (b == 0)
@@ -23,57 +27,67 @@ public class CalculatorImplementation extends UnicastRemoteObject implements Cal
         return (a * b) / gcd(a, b);
     }
     @Override
-    public void pushOperation(String operator) throws RemoteException {
+    public void pushOperation(String operator, String clientID) throws RemoteException {
         int x = 0;
-        int min = Collections.min(mainStack);
-        int max = Collections.max(mainStack);
+
         switch (operator) {
             case "min":
-                x = min;
+                x = Collections.min(mainStack.get(clientID));;
                 break;
             case "max":
-                x = max;
+                x = Collections.max(mainStack.get(clientID));
                 break;
             case "gcd":
-                x = gcd(min, max);
+                x = mainStack.get(clientID).pop();
+                while (!mainStack.get(clientID).isEmpty()) {
+                    x = gcd(x, mainStack.get(clientID).pop());
+                }
                 break;
             case "lcm":
-                x = mainStack.pop();
-                while (!mainStack.isEmpty()) {
-                    x = lcm(x, mainStack.pop());
+                x = mainStack.get(clientID).pop();
+                while (!mainStack.get(clientID).isEmpty()) {
+                    x = lcm(x, mainStack.get(clientID).pop());
                 }
                 break;
         }
-        mainStack.clear();
-        pushValue(x);
+        mainStack.get(clientID).clear();
+        pushValue(x, clientID);
     }
 
     @Override
-    public String stackState() throws RemoteException {
+    public String stackState(String clientID) throws RemoteException {
+
         String state = "";
-        for (int i : mainStack) {
+        for (int i : mainStack.get(clientID)) {
             state += i + " ";
         }
         return state;
     }
 
     @Override
-    public boolean isEmpty() throws RemoteException {
-        return mainStack.isEmpty();
+    public boolean isEmpty(String clientID) throws RemoteException {
+        return mainStack.get(clientID).isEmpty();
     }
 
     @Override
-    public int pop() throws RemoteException {
-        return mainStack.pop();
+    public int pop(String clientID) throws RemoteException {
+        return mainStack.get(clientID).pop();
     }
 
     @Override
-    public int delayPop(int millis) throws RemoteException {
+    public int delayPop(int millis, String clientID) throws RemoteException {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return pop();
+        return pop(clientID);
+    }
+
+    @Override
+    public String getClientID() throws RemoteException, ServerNotActiveException {
+        String ID = UUID.randomUUID().toString();
+        mainStack.put(ID, new Stack<>());
+        return ID;
     }
 }

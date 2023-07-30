@@ -8,7 +8,7 @@ SERVER_CLASS = CalculatorServer
 CLIENT_CLASS = CalculatorClient
 
 
-default: compile
+default: compile server client
 
 compile:
 	$(JAVAC) -d $(OUT_DIR) $(SRC_DIR)/*.java
@@ -20,3 +20,4 @@ server:
 # Run the CalculatorClient
 client:
 	$(JAVA) -cp $(OUT_DIR) $(CLIENT_CLASS)
+
