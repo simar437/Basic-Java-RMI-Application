@@ -1,5 +1,4 @@
 import java.rmi.RemoteException;
-import java.rmi.server.ServerNotActiveException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Collections;
 import java.util.HashMap;
@@ -55,16 +54,6 @@ public class CalculatorImplementation extends UnicastRemoteObject implements Cal
     }
 
     @Override
-    public String printStack(String clientID) throws RemoteException {
-
-        String state = "";
-        for (int i : mainStack.get(clientID)) {
-            state += i + " ";
-        }
-        return state;
-    }
-
-    @Override
     public boolean isEmpty(String clientID) throws RemoteException {
         return mainStack.get(clientID).isEmpty();
     }
@@ -85,7 +74,7 @@ public class CalculatorImplementation extends UnicastRemoteObject implements Cal
     }
 
     @Override
-    public String getClientID() throws RemoteException, ServerNotActiveException {
+    public String getClientID() throws RemoteException {
         String ID = UUID.randomUUID().toString();
         mainStack.put(ID, new Stack<>());
         return ID;
