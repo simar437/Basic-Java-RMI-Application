@@ -8,6 +8,8 @@ public class CalculatorServer {
             Registry registry = LocateRegistry.createRegistry(1099);
             registry.rebind("Calculator", calculator);
             System.out.println("Server Running...");
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

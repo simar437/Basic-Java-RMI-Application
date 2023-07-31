@@ -7,7 +7,7 @@ public interface Calculator extends Remote {
 
     void pushOperation(String operator, String clientID) throws RemoteException;
 
-    String stackState(String clientID) throws RemoteException;
+    String printStack(String clientID) throws RemoteException;
 
     boolean isEmpty(String clientID) throws RemoteException;
 

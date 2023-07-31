@@ -7,7 +7,7 @@ import java.util.Stack;
 import java.util.UUID;
 
 public class CalculatorImplementation extends UnicastRemoteObject implements Calculator {
-    //Stack<Integer> mainStack.get(clientID) = new Stack<>();
+
     HashMap<String, Stack<Integer>> mainStack = new HashMap<>();
     protected CalculatorImplementation() throws RemoteException {
         super();
@@ -32,7 +32,7 @@ public class CalculatorImplementation extends UnicastRemoteObject implements Cal
 
         switch (operator) {
             case "min":
-                x = Collections.min(mainStack.get(clientID));;
+                x = Collections.min(mainStack.get(clientID));
                 break;
             case "max":
                 x = Collections.max(mainStack.get(clientID));
@@ -55,7 +55,7 @@ public class CalculatorImplementation extends UnicastRemoteObject implements Cal
     }
 
     @Override
-    public String stackState(String clientID) throws RemoteException {
+    public String printStack(String clientID) throws RemoteException {
 
         String state = "";
         for (int i : mainStack.get(clientID)) {
