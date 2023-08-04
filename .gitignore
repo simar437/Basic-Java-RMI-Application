@@ -4,6 +4,7 @@ out/
 !**/src/test/**/out/
 .idea
 Assignment 1.iml
+venv
 ### Eclipse ###
 .apt_generated
 .classpath
