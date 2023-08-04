@@ -14,5 +14,6 @@ public interface Calculator extends Remote {
 
     int delayPop(int millis, String clientID) throws RemoteException;
 
+    // Custom function to generate Client ID and put it in HashMap
     String getClientID() throws RemoteException, ServerNotActiveException;
 }

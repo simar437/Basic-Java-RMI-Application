@@ -7,6 +7,7 @@ import java.util.UUID;
 
 public class CalculatorImplementation extends UnicastRemoteObject implements Calculator {
 
+    // Used HashMap to map client with their own unique stack using Client ID
     HashMap<String, Stack<Integer>> mainStack = new HashMap<>();
     protected CalculatorImplementation() throws RemoteException {
         super();
@@ -72,6 +73,7 @@ public class CalculatorImplementation extends UnicastRemoteObject implements Cal
         }
         return pop(clientID);
     }
+
 
     @Override
     public String getClientID() throws RemoteException {
