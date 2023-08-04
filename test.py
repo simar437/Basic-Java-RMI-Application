@@ -47,7 +47,7 @@ async def main(num_clients, num_test):
 
 if __name__ == "__main__":
     num_clients = 10  # Replace with your desired value
-    num_test = 3  # Replace with your desired value
+    num_test = 5  # Replace with your desired value
 
     # NOTE: Actual number of client will be num_clients * num_test
     asyncio.run(main(num_clients, num_test))
