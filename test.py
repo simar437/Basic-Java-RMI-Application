@@ -1,15 +1,16 @@
 import asyncio
 import subprocess
 
+
 async def run_client_test(i, j):
     cmd = f"java -cp out ClientTest"
 
-    # Read the corresponding input for CalculatorClient from the file
+    # Read the corresponding input for ClientTest from the file
     input_file = f"test/in/input_{j}.txt"
     with open(input_file, 'r') as f:
         client_input = f.read().strip()
 
-    # Run CalculatorClient with input redirection and capture the output
+    # Run ClientTest with input redirection and capture the output
     completed_process = await asyncio.subprocess.create_subprocess_shell(
         cmd, stdin=asyncio.subprocess.PIPE, stdout=asyncio.subprocess.PIPE
     )
@@ -41,7 +42,7 @@ async def main(num_clients, num_test):
     # Wait for all tasks to complete
     results = await asyncio.gather(*tasks)
     passed_tests = sum(1 for result in results if result)
-    print(f"\nNumber of tests passed: {passed_tests}/{num_clients*num_test}")
+    print(f"\nNumber of tests passed: {passed_tests}/{num_clients * num_test}")
 
 
 if __name__ == "__main__":
@@ -50,4 +51,3 @@ if __name__ == "__main__":
 
     # NOTE: Actual number of client will be num_clients * num_test
     asyncio.run(main(num_clients, num_test))
-

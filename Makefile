@@ -1,12 +1,12 @@
 JAVAC = javac
 JAVA = java
+PYTHON = python
 
 SRC_DIR = src
 OUT_DIR = out
 
 SERVER_CLASS = CalculatorServer
 CLIENT_CLASS = CalculatorClient
-
 
 default: compile
 
@@ -20,4 +20,9 @@ server:
 # Run the CalculatorClient
 client:
 	$(JAVA) -cp $(OUT_DIR) $(CLIENT_CLASS)
+
+# Run tests
+.PHONY: test
+test:
+	$(PYTHON) test.py
 
