@@ -1,6 +1,5 @@
 JAVAC = javac
 JAVA = java
-PYTHON = python
 
 SRC_DIR = src
 OUT_DIR = out
@@ -24,5 +23,5 @@ client:
 # Run tests
 .PHONY: test
 test:
-	$(PYTHON) test.py
+	bash test.sh
 

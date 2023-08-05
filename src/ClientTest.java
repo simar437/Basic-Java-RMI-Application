@@ -7,7 +7,7 @@ public class ClientTest {
         Scanner sc = new Scanner(System.in);
         try {
 
-            Registry registry = LocateRegistry.getRegistry("localhost");
+            Registry registry = LocateRegistry.getRegistry(1099);
             Calculator calculator = (Calculator) registry.lookup("Calculator");
             String clientID = calculator.getClientID();
             loop: while (true) {

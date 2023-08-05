@@ -7,7 +7,7 @@ public class CalculatorClient {
         Scanner sc = new Scanner(System.in);
         try {
             System.out.println("Welcome to Calculator Application");
-            Registry registry = LocateRegistry.getRegistry("localhost");
+            Registry registry = LocateRegistry.getRegistry(1099);
             System.out.println("Establishing connection with the server...");
             Calculator calculator = (Calculator) registry.lookup("Calculator");
             String clientID = calculator.getClientID();

@@ -25,7 +25,7 @@ This is the client-side code responsible for interacting with the server. The cl
 
 This file implements all the same functionality as CalculatorClient.java without any additional output for the user, this file is used for testing. 
 
-### test.py
+### test.sh
 
 Initializes multiple clients asynchronously (uses ClientTest instead of CalculatorClient for easy input and output), this script gets its input from test/in/input_{NUMBER}.txt and compares the output of the client with test/output/reference_output_{NUMBER}.txt
 
