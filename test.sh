@@ -20,33 +20,42 @@ run_client_test() {
     # Compare the output
     if [ "$client_output" = "$reference_output" ]; then
         echo "Client $i, Test $j: Output matches the reference."
-        return 0
+        exit 0
     else
         echo "Client $i, Test $j: Output does not match the reference."
         echo "Actual Output:"
         echo "$client_output"
         echo "Reference Output:"
         echo "$reference_output"
-        return 1
+        exit 1
     fi
 }
 
 # Main function
 main() {
-    num_clients=10  # Replace with your desired value
-    num_tests=5     # Replace with your desired value
+    num_clients=10   # Replace with your desired value
+    num_tests=5      # Replace with your desired value
 
     passed_tests=0
+    declare -a statuses
 
     for ((i=1; i<=num_clients; i++)); do
         for ((j=1; j<=num_tests; j++)); do
-            if run_client_test "$i" "$j"; then
-                ((passed_tests++))
-            fi
+            run_client_test "$i" "$j" &  # Run the test in the background using &
+            statuses+=($!)  # Store the PID of the background task
         done
     done
 
-    echo -e "\nNumber of tests passed: $passed_tests/$((num_clients * num_tests))"
+    # Wait for all background tasks to complete
+    for pid in "${statuses[@]}"; do
+        wait "$pid"
+        if [ $? -eq 0 ]; then
+            ((passed_tests++))
+        fi
+    done
+
+    echo -e "\nAll tests have completed."
+    echo "Number of tests passed: $passed_tests/$((num_clients * num_tests))"
 }
 
 main
