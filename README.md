@@ -53,7 +53,6 @@ Follow these steps to run the RMI calculator application:
    ```
    make test
    ```
-   NOTE: Running the above command requires python 3 installation.
 ### Custom tests
    To add custom tests, create a new file in test/in folder with name input_{NUMBER}.txt and it's reference output in test/output/reference_output_{NUMBER}.txt
 
