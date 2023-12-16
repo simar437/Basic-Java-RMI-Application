@@ -1,4 +1,4 @@
-# Calculator RMI Application
+# Distributed Stack with basic mathematical operations using Java RMI 
 
 This is a Java RMI (Remote Method Invocation) application that provides basic calculator functionality using a server-client architecture. The server implements the `Calculator` interface, which defines various mathematical operations, and the client interacts with the server to perform these operations on a stack.
 
